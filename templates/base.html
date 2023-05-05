@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <title>
+      {% block title %}{% endblock %}
+    </title>
+
+    {% block head %}{% endblock %}
+  </head>
+  <body class="bg-dark">
+    <header>
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Movie Rating</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mynavbar">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="movies">All Movies</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/users">User Profile</a>
+              </li>
+            </ul>
+            <form class="d-flex" method="GET" action="/search">
+              <input class="form-control me-2" type="text" name="query" placeholder="Search movies...">
+              <button class="btn btn-danger" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      
+    </header>
+    {% for msg in get_flashed_messages() %}
+      <p class="flash-msg alert alert-danger">
+        {{ msg }}
+      </p>
+    {% endfor %}
+    
+    {% block body %}{% endblock %}
+
+    {% block after_body %}{% endblock %}
+  </body>
+</html>

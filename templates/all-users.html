@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+  <div class="row">
+    {% for user in users %}
+    <div class="col-md-4 mb-3">
+      <div class="card bg-black shadow-lg">
+        <div class="card-header">
+          <h5 class="card-title"><a class="text-danger-red text-decoration-none" href="/users/{{ user.user_id }}">{{ user.email }}</a></h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            {% for rating in user.ratings %}
+            <li class="list-group text-white">
+              {{ rating.movie.title }}:
+              <span class="rating_num_{{ rating.rating_id }}">{{ rating.score }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
